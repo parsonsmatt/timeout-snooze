@@ -5,6 +5,9 @@ This package provides a `Timeout` that can be snoozed, allowing you to give extr
 The primary purpose of this package is to support a timeout for `hspec` tests that can be reset during flaky test detection (where we rerun a test case, and if it succeeds the second time, we call it a flake).
 When we initially implemented flaky test detection, we simply doubled our timeout, but this is unnecessarily lax, and makes true problems take twice as long to be detected.
 
+The system is based on the `stm-delay` package, which leverages the GHC event manager API.
+This package incurs a single thread overhead for `race` for the timeout.
+
 ## Comparison with Existing Implementations
 
 ### `System.Timeout`
