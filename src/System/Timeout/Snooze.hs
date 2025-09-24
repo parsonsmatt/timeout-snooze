@@ -1,17 +1,15 @@
 -- | This module provides a 'Timeout' that can be remotely reset, allowing
 -- the timeout to be extended.
---
---
 module System.Timeout.Snooze
     ( timeoutWithSnooze
     , SnoozeHandle
     , snooze
     ) where
 
+import Control.Concurrent.STM.Delay
+import UnliftIO
 import UnliftIO.Async
 import UnliftIO.STM
-import UnliftIO
-import Control.Concurrent.STM.Delay
 
 -- | A 'SnoozeHandle' is a handle that allows you to reset the timeout for
 -- the given action.
@@ -22,7 +20,7 @@ newtype SnoozeHandle = SnoozeHandle (IO ())
 -- | Reset the timeout to the original delay given in 'timeoutWithSnooze'.
 --
 -- @since 0.1.0.0
-snooze :: MonadIO m => SnoozeHandle -> m ()
+snooze :: (MonadIO m) => SnoozeHandle -> m ()
 snooze (SnoozeHandle action) = liftIO action
 
 -- | Like "System.Timeout".'System.Timeout.timeout', but also passes
@@ -30,10 +28,12 @@ snooze (SnoozeHandle action) = liftIO action
 -- the timeout to the original delay.
 --
 -- @since 0.1.0.0
-timeoutWithSnooze :: MonadUnliftIO m => Int -> (SnoozeHandle -> m a) -> m (Maybe a)
+timeoutWithSnooze
+    :: (MonadUnliftIO m) => Int -> (SnoozeHandle -> m a) -> m (Maybe a)
 timeoutWithSnooze microseconds action = do
     delay <- liftIO $ newDelay microseconds
-    let bump = liftIO  $ updateDelay delay microseconds
+    let
+        bump = liftIO $ updateDelay delay microseconds
     ea <- race (liftIO (atomically (waitDelay delay))) (action (SnoozeHandle bump))
     case ea of
         Left () -> pure Nothing
