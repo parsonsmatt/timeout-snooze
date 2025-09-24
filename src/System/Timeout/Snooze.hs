@@ -8,8 +8,6 @@ module System.Timeout.Snooze
 
 import Control.Concurrent.STM.Delay
 import UnliftIO
-import UnliftIO.Async
-import UnliftIO.STM
 
 -- | A 'SnoozeHandle' is a handle that allows you to reset the timeout for
 -- the given action.
