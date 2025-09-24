@@ -36,17 +36,6 @@ ghc-options:
 library:
   source-dirs: src
 
-executables:
-  timeout-snooze-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - timeout-snooze
-
 tests:
   timeout-snooze-test:
     main:                Spec.hs
