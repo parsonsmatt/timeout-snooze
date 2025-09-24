@@ -31,8 +31,12 @@ timeoutWithSnooze
 timeoutWithSnooze microseconds action = do
     delay <- liftIO $ newDelay microseconds
     let
-        bump = liftIO $ updateDelay delay microseconds
-    ea <- race (liftIO (atomically (waitDelay delay))) (action (SnoozeHandle bump))
+        bump = updateDelay delay microseconds
+        sleep = liftIO $ atomically $ waitDelay delay
+        work = do
+            liftIO bump
+            action (SnoozeHandle bump)
+    ea <- race sleep work
     case ea of
         Left () -> pure Nothing
         Right a -> pure (Just a)
