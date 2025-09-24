@@ -24,8 +24,6 @@ source-repository head
   location: https://github.com/githubuser/timeout-snooze
 
 library
-  exposed-modules:
-      Lib
   other-modules:
       Paths_timeout_snooze
   autogen-modules:
@@ -35,20 +33,6 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
-  default-language: Haskell2010
-
-executable timeout-snooze-exe
-  main-is: Main.hs
-  other-modules:
-      Paths_timeout_snooze
-  autogen-modules:
-      Paths_timeout_snooze
-  hs-source-dirs:
-      app
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , timeout-snooze
   default-language: Haskell2010
 
 test-suite timeout-snooze-test
