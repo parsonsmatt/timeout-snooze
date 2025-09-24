@@ -6,12 +6,14 @@ cabal-version: 2.2
 
 name:           timeout-snooze
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/timeout-snooze#readme>
-homepage:       https://github.com/githubuser/timeout-snooze#readme
-bug-reports:    https://github.com/githubuser/timeout-snooze/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2025 Author name here
+synopsis:       Efficient timeout with reset
+description:    Please see the README on GitHub at <https://github.com/parsonsmatt/timeout-snooze#readme>
+category:       Concurrent
+homepage:       https://github.com/parsonsmatt/timeout-snooze#readme
+bug-reports:    https://github.com/parsonsmatt/timeout-snooze/issues
+author:         Matt Parsons
+maintainer:     parsonsmatt@gmail.com
+copyright:      2025 Matt Parsons
 license:        BSD-3-Clause
 license-file:   LICENSE
 build-type:     Simple
@@ -21,7 +23,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/timeout-snooze
+  location: https://github.com/parsonsmatt/timeout-snooze
 
 library
   exposed-modules:
