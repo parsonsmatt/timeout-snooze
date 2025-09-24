@@ -1,5 +1,4 @@
 import Control.Concurrent
-import Control.Monad
 import System.Timeout.Snooze
 import Test.Hspec
 
@@ -12,8 +11,8 @@ main = hspec $ do
             munit `shouldBe` Nothing
 
         it "passes if you're fast enough" $ do
-            munit <- timeoutWithSnooze 1000 $ \_ -> do
-                threadDelay 100
+            munit <- timeoutWithSnooze 10000 $ \_ -> do
+                threadDelay 1000
             munit `shouldBe` Just ()
 
         it "allows you to snooze" $ do
